@@ -1,0 +1,34 @@
+.profile__image-button {
+    position: relative;
+}
+
+.profile__image-button::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #000;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity .6s;
+    top: 0;
+    left: -15px;
+  }
+  
+  .profile__image-button:hover::after {
+    opacity: .8;
+    background-image: url(../../../images/svg/EditAvatar.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 767px) {
+    .profile__image-button {
+        margin: 0 auto;
+    }
+
+    .profile__image-button::after {
+      z-index: 0;
+    }
+}

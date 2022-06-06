@@ -1,0 +1,13 @@
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 282px;
+    position: relative;
+}
+
+@media screen and (max-width: 767px) {
+    .card {
+        margin: 0 auto;
+        min-width: 282px;
+    }
+}

@@ -1,0 +1,4 @@
+.card__heart_active {
+        opacity: 1;
+        background-image: url(../../../../images/svg/heart-black.svg);
+}

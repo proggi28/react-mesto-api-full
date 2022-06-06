@@ -1,0 +1,18 @@
+.cards__list-style {
+    padding: 0;
+    margin: 0 auto;
+    list-style-type: none;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 880px;
+    row-gap: 20px;
+    column-gap: 17px;
+}
+
+@media screen and (max-width: 767px) {
+    .cards__list-style {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, 1fr);
+    }
+}
