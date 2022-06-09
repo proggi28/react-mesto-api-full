@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, errors, Joi } = require('celebrate');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const NotFoundError = require('./errors/NotFoundError');
 const { usersRoutes } = require('./routes/users');
 const { cardsRoutes } = require('./routes/cards');
@@ -12,6 +13,10 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+const CORS_CONFIG = { origin: ['http://localhost:3000/', 'https://localhost:3000/', 'https://mesto.praktikum.karpenko.nomoredomains.xyz', 'https://mesto.praktikum.karpenko.nomoredomains.xyz'], credentials: true };
+app.options('*', cors(CORS_CONFIG));
+app.use(cors(CORS_CONFIG));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
