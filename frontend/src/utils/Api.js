@@ -75,7 +75,7 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-27',
+    baseUrl: 'https://api.praktikum.karpenko.nomoredomains.xyz',
     headers: {
       authorization: '772a000d-3f96-41bc-86aa-236e12ab469e',
       "content-type": "application/json"
