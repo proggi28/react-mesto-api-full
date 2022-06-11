@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, errors, Joi } = require('celebrate');
@@ -9,7 +10,6 @@ const { cardsRoutes } = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 
@@ -24,7 +24,7 @@ app.use(
       'http://localhost:3000/',
       'https://mesto.praktikum.karpenko.nomoredomains.xyz',
     ],
-    // credentials: true,
+    credentials: true,
   }),
 );
 
