@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const ForbiddenError = require('../errors/ForbiddenError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 
-const JWT_SECRET = 'verylongpasswordoftheyandexpraktikumstudent';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 // eslint-disable-next-line consistent-return
 module.exports = async (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     let payload;
 
     try {
-      payload = await jwt.verify(token, JWT_SECRET);
+      payload = await jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
     } catch (err) {
       next(new ForbiddenError('Необходима авторизация'));
     }
