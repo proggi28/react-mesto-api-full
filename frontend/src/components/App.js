@@ -188,8 +188,8 @@ function App() {
 
       api
         .getCards()
-        .then((dataCards) => {
-          setCards(dataCards);
+        .then((cards) => {
+          setCards(cards);
         })
         .catch((err) => {
           console.log(err);
