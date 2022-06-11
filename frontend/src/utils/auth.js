@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.praktikum.karpenko.nomoredomains.xyz";
+export const BASE_URL = "https://api.praktikum.karpenko.nomoredomains.xyz/";
 
 const checkResponse = (res) =>  {
   if (res.ok) {
@@ -33,6 +33,7 @@ export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
