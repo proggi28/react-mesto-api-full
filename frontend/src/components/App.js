@@ -205,7 +205,7 @@ function App() {
         .then((res) => {
           setLoggedIn(true);
           navigate.push("/");
-          setCurrentUserEmail(res.data.email);
+          setCurrentUserEmail(res.email);
         })
         .catch((err) => {
           console.log(err);
