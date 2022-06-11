@@ -23,6 +23,7 @@ app.use(
     origin: [
       'http://localhost:3000/',
       'https://mesto.praktikum.karpenko.nomoredomains.xyz',
+      'http://mesto.praktikum.karpenko.nomoredomains.xyz',
     ],
     credentials: true,
   }),
