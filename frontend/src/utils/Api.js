@@ -74,7 +74,7 @@ class Api {
 
 const token = localStorage.getItem('jwt');
 export const api = new Api({
-    baseUrl: 'http://api.praktikum.karpenko.nomoredomains.xyz',
+    baseUrl: 'https://api.praktikum.karpenko.nomoredomains.xyz',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
