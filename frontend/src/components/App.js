@@ -202,10 +202,10 @@ function App() {
     if (jwt) {
       auth
         .tokenCheck(jwt)
-        .then((data) => {
+        .then((res) => {
           setLoggedIn(true);
           navigate.push("/");
-          setCurrentUserEmail(data.email);
+          setCurrentUserEmail(res.data.email);
         })
         .catch((err) => {
           console.log(err);
