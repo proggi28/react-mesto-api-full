@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const User = require('../models/user');
 
-const JWT_SECRET = 'verylongpasswordoftheyandexpraktikumstudent';
+const { JWT_SECRET } = process.env;
 
 const SALT_ROUNDS = 10;
 
