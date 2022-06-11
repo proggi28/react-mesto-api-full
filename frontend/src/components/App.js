@@ -179,8 +179,8 @@ function App() {
     if (!loggedIn) {
       api
         .getUserServerInfo()
-        .then((data) => {
-          setCurrentUser(data);
+        .then((res) => {
+          setCurrentUser(res);
         })
         .catch((err) => {
           console.log(err);
@@ -188,8 +188,8 @@ function App() {
 
       api
         .getCards()
-        .then((dataCards) => {
-          setCards(dataCards);
+        .then((res) => {
+          setCards(res.dataCards);
         })
         .catch((err) => {
           console.log(err);
