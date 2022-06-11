@@ -13,19 +13,19 @@ class Api {
     }
 
     getUserServerInfo() {
-        return fetch(`${this._baseUrl}/users/me`, {
+        return fetch(`${this._baseUrl}/user/me`, {
             headers: this._headers,
         }).then(this._errorHandler)
     }
 
     getCards() {
-        return fetch(`${this._baseUrl}/cards`, {
+        return fetch(`${this._baseUrl}/card`, {
             headers: this._headers
         }).then(this._errorHandler)
     }
 
     addCard(item) {
-        return fetch(`${this._baseUrl}/cards`, {
+        return fetch(`${this._baseUrl}/card`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify(item) 
@@ -33,7 +33,7 @@ class Api {
     }
     
     editProfile(data) {
-        return fetch(`${this._baseUrl}/users/me`, {
+        return fetch(`${this._baseUrl}/user/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(data)
@@ -41,7 +41,7 @@ class Api {
     }
 
     editAvatar(data) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
+        return fetch(`${this._baseUrl}/user/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify(data)
@@ -49,21 +49,21 @@ class Api {
     }
 
     deleteCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return fetch(`${this._baseUrl}/card/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
         }).then(this._errorHandler)
     }
 
     deleteLike(cardId) {
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return fetch(`${this._baseUrl}/card/like/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
         }).then(this._errorHandler)
     }
 
     addLike(cardId, isLiked) {
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        return fetch(`${this._baseUrl}/card/${cardId}/like`, {
             method: `${isLiked ? 'PUT' : 'DELETE'}`,
             headers: this._headers
         }).then(this._errorHandler)
