@@ -21,7 +21,8 @@ app.options('*', cors());
 app.use(
   cors({
     origin: [
-      'http://localhost:3000/',
+      'http://localhost:3000',
+      'https://localhost:3000',
       'https://mesto.praktikum.karpenko.nomoredomains.xyz',
       'http://mesto.praktikum.karpenko.nomoredomains.xyz',
     ],
