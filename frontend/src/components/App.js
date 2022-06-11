@@ -84,8 +84,8 @@ function App() {
   function handleUpdateAvatar(avatar) {
     api
       .editAvatar(avatar)
-      .then((data) => {
-        setCurrentUser(data);
+      .then((res) => {
+        setCurrentUser(res);
       })
       .then(() => {
         closeAllPopups();
@@ -179,8 +179,8 @@ function App() {
     if (!loggedIn) {
       api
         .getUserServerInfo()
-        .then((data) => {
-          setCurrentUser(data);
+        .then((res) => {
+          setCurrentUser(res.data);
         })
         .catch((err) => {
           console.log(err);
@@ -188,8 +188,8 @@ function App() {
 
       api
         .getCards()
-        .then((cards) => {
-          setCards(cards);
+        .then((res) => {
+          setCards(res.cards);
         })
         .catch((err) => {
           console.log(err);
