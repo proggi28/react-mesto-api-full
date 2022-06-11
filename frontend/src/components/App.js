@@ -41,14 +41,14 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i.id === currentUser.id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api
       .addLike(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c.id === card.id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
       .catch((err) => {
@@ -58,9 +58,9 @@ function App() {
 
   function handleCardDelete(card) {
     api
-      .deleteCard(card.id)
+      .deleteCard(card._id)
       .then(() => {
-        setCards((cards) => cards.filter((c) => c.id !== card.id));
+        setCards((cards) => cards.filter((c) => c !== card));
       })
       .catch((err) => {
         console.log(err);
@@ -84,8 +84,8 @@ function App() {
   function handleUpdateAvatar(avatar) {
     api
       .editAvatar(avatar)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((data) => {
+        setCurrentUser(data.avatar);
       })
       .then(() => {
         closeAllPopups();
