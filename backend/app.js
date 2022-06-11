@@ -11,26 +11,37 @@ const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 require('dotenv').config();
 
-const { PORT = 4000 } = process.env;
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const CORS_CONFIG = {
-  origin: [
-    'http://localhost:3000/',
-    'https://localhost:3000/',
-    'https://mesto.praktikum.karpenko.nomoredomains.xyz',
-    'https://mesto.praktikum.karpenko.nomoredomains.xyz',
-  ],
-  credentials: true,
-};
-app.options('*', cors(CORS_CONFIG));
-app.use(cors(CORS_CONFIG));
+app.use(requestLogger);
+app.use(express.json());
+// app.options('*', cors());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000/',
+      'https://mesto.praktikum.karpenko.nomoredomains.xyz',
+    ],
+    // credentials: true,
+  }),
+);
+
+// const CORS_CONFIG = {
+//   origin: [
+//     'http://localhost:3000/',
+//     'https://localhost:3000/',
+//     'https://mesto.praktikum.karpenko.nomoredomains.xyz',
+//     'https://mesto.praktikum.karpenko.nomoredomains.xyz',
+//   ],
+//   credentials: true,
+// };
+// app.options('*', cors(CORS_CONFIG));
+// app.use(cors(CORS_CONFIG));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {

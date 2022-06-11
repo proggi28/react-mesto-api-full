@@ -195,7 +195,7 @@ function App() {
           console.log(err);
         });
     }
-  }, []);
+  }, [loggedIn]);
 
   useEffect(() => {
       const jwt = localStorage.getItem("jwt"); 
@@ -209,7 +209,6 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
-
           return [];
         });
     }

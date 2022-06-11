@@ -14,14 +14,12 @@ class Api {
 
     getUserServerInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
-            method: 'GET',
             headers: this._headers,
         }).then(this._errorHandler)
     }
 
     getCards() {
         return fetch(`${this._baseUrl}/cards`, {
-            method: 'GET',
             headers: this._headers
         }).then(this._errorHandler)
     }
@@ -74,10 +72,12 @@ class Api {
     
 }
 
+const token = localStorage.getItem('jwt');
 export const api = new Api({
     baseUrl: 'https://api.praktikum.karpenko.nomoredomains.xyz',
     headers: {
-      authorization: '772a000d-3f96-41bc-86aa-236e12ab469e',
-      "content-type": "application/json"
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     }
   });
