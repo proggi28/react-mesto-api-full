@@ -39,21 +39,45 @@ function App() {
     setSelectedCard({ ...card });
   }
 
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser.id);
+  // function handleCardLike(card) {
+  //   // Снова проверяем, есть ли уже лайк на этой карточке
+  //   const isLiked = card.likes.some((i) => i === currentUser.id);
 
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api
-      .addLike(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((cards) =>
-          cards.map((c) => (c._id === card._id ? newCard : c))
-        );
+  //   // Отправляем запрос в API и получаем обновлённые данные карточки
+  //   api
+  //     .addLike(card._id)
+  //     .then((newCard) => {
+  //       setCards((cards) =>
+  //         cards.map((c) => (c._id === card._id ? newCard : c)),
+  //       );
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some(user => user === currentUser.id);
+
+    const setLikeState = (newCard) => {
+      setCards((state) =>
+        state.map((stateCard) => stateCard._id === card._id ? newCard : stateCard))
+    }
+
+    if (!isLiked) {
+
+      api.deleteLike(card._id)
+      .then((newCard) => setLikeState(newCard))
+      .catch((data) =>{
+        console.log(data)
       })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    } 
+      api.addLike(card._id)
+      .then((newCard) => setLikeState(newCard))
+      .catch((data) =>{
+        console.log(data)
+      })
   }
 
   function handleCardDelete(card) {
@@ -142,10 +166,10 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        setLoggedIn(true);
-        setCurrentUserEmail(email);
-        navigate.push("/");
-        localStorage.setItem("jwt", res.token);
+          setLoggedIn(true);
+          setCurrentUserEmail(email);
+          navigate.push("/");
+          localStorage.setItem("jwt", res.token);
       })
       .catch((err) => {
         console.log(err);
@@ -176,7 +200,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (!loggedIn) {
+    if (loggedIn) {
       api
         .getUserServerInfo()
         .then((data) => {
@@ -202,10 +226,10 @@ function App() {
     if (jwt) {
       auth
         .tokenCheck(jwt)
-        .then((res) => {
+        .then((data) => {
           setLoggedIn(true);
           navigate.push("/");
-          setCurrentUserEmail(res.email);
+          setCurrentUserEmail(data.email);
         })
         .catch((err) => {
           console.log(err);

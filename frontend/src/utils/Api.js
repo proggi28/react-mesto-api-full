@@ -55,21 +55,19 @@ class Api {
         }).then(this._errorHandler)
     }
 
+    addLike(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+            method: 'PUT',
+            headers: this._headers
+        }).then(this._errorHandler)
+    }
+
     deleteLike(cardId) {
-        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
             method: 'DELETE',
             headers: this._headers
         }).then(this._errorHandler)
-    }
-
-    addLike(cardId, isLiked) {
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-            method: `${isLiked ? 'PUT' : 'DELETE'}`,
-            headers: this._headers
-        }).then(this._errorHandler)
-    }
-
-    
+    }    
 }
 
 const token = localStorage.getItem('jwt');
