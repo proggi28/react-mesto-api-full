@@ -57,27 +57,34 @@ function App() {
   // }
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some(user => user === currentUser.id);
-
-    const setLikeState = (newCard) => {
-      setCards((state) =>
-        state.map((stateCard) => stateCard._id === card._id ? newCard : stateCard))
-    }
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     if (!isLiked) {
-
-      api.deleteLike(card._id)
-      .then((newCard) => setLikeState(newCard))
+      api
+      .addLike(card._id)
+      .then((newCard) => { 
+        setCards((state) =>
+          state.map((с) => (с._id === card._id ? newCard : с)), 
+        );
+      })
       .catch((data) =>{
         console.log(data)
       })
+     
 
-    } 
-      api.addLike(card._id)
-      .then((newCard) => setLikeState(newCard))
+    } else {
+      api
+      .deleteLike(card._id)
+      .then((newCard) => { 
+        setCards((state) =>
+          state.map((с) => (с._id === card._id ? newCard : с)), 
+        );
+      })
       .catch((data) =>{
         console.log(data)
       })
+      
+    }
   }
 
   function handleCardDelete(card) {
@@ -119,11 +126,13 @@ function App() {
       });
   }
 
-  function handleAddPlaceSubmit(name, link) {
+  function handleAddPlaceSubmit(data) {
     api
-      .addCard(name, link)
+      .addCard(data)
       .then((newCard) => {
+        console.log(newCard)
         setCards([newCard, ...cards]);
+        console.log(...cards)
       })
       .then(() => {
         closeAllPopups();
@@ -166,10 +175,10 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
+          localStorage.setItem("jwt", res.token);
           setLoggedIn(true);
           setCurrentUserEmail(email);
           navigate.push("/");
-          localStorage.setItem("jwt", res.token);
       })
       .catch((err) => {
         console.log(err);
@@ -267,6 +276,8 @@ function App() {
 
           <Switch>
             <ProtectedRoute
+            exact
+            path="/"
               loggedIn={loggedIn}
               component={Main}
               onEditAvatar={handleEditAvatarClick}
@@ -274,8 +285,6 @@ function App() {
               onAddPlace={handleAddPlaceClick}
               onCardClick={handleCardClick}
               cards={cards}
-              exact
-              path="/"
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
             />
