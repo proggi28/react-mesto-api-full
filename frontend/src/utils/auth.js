@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.praktikum.karpenko.nomoredomains.xyz";
+export const BASE_URL = "http://localhost:4000";
 
 const checkResponse = (res) =>  {
   if (res.ok) {
