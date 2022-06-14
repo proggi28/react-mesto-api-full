@@ -83,7 +83,7 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: 'http://localhost:4000',
+    baseUrl: 'https://api.praktikum.karpenko.nomoredomains.xyz',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
